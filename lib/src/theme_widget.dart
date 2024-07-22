@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:multi_split_view/src/theme_data.dart';
+import 'package:multi_split_view_next/src/theme_data.dart';
 
 /// Applies a [MultiSplitView] theme to descendant widgets.
 /// See also:

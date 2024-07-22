@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:multi_split_view/src/area.dart';
-import 'package:multi_split_view/src/area_widget_builder.dart';
-import 'package:multi_split_view/src/controller.dart';
-import 'package:multi_split_view/src/divider_tap_typedefs.dart';
-import 'package:multi_split_view/src/divider_widget.dart';
-import 'package:multi_split_view/src/internal/divider_util.dart';
-import 'package:multi_split_view/src/internal/layout_constraints.dart';
-import 'package:multi_split_view/src/internal/layout_delegate.dart';
-import 'package:multi_split_view/src/policies.dart';
-import 'package:multi_split_view/src/theme_data.dart';
-import 'package:multi_split_view/src/theme_widget.dart';
+import 'package:multi_split_view_next/src/area.dart';
+import 'package:multi_split_view_next/src/area_widget_builder.dart';
+import 'package:multi_split_view_next/src/controller.dart';
+import 'package:multi_split_view_next/src/divider_tap_typedefs.dart';
+import 'package:multi_split_view_next/src/divider_widget.dart';
+import 'package:multi_split_view_next/src/internal/divider_util.dart';
+import 'package:multi_split_view_next/src/internal/layout_constraints.dart';
+import 'package:multi_split_view_next/src/internal/layout_delegate.dart';
+import 'package:multi_split_view_next/src/policies.dart';
+import 'package:multi_split_view_next/src/theme_data.dart';
+import 'package:multi_split_view_next/src/theme_widget.dart';
 
 /// A widget to provides horizontal or vertical multiple split view.
 class MultiSplitView extends StatefulWidget {
