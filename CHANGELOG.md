@@ -1,3 +1,10 @@
+## 3.2.4
+
+* `Area`
+  * Added `copyWith` method.
+* `MultiSplitView`
+  * Added `onDividerDragStart` and `onDividerDragEnd` callbacks.
+
 ## 3.2.3
 
 * `MultiSplitView`
