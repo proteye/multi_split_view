@@ -1,4 +1,4 @@
-[![](https://img.shields.io/badge/pub-v3.2.4-blue)](https://pub.dev/packages/multi_split_view)
+[![](https://img.shields.io/pub/v/multi_split_view_next.svg)](https://pub.dev/packages/multi_split_view)
 [![](https://img.shields.io/badge/Flutter-%E2%9D%A4-red)](https://flutter.dev/)
 
 # Multi split view
