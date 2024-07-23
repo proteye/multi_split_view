@@ -1,3 +1,8 @@
+## 3.2.5
+
+* `MultiSplitViewController`
+  * Added `updateArea` method.
+
 ## 3.2.4
 
 * `Area`

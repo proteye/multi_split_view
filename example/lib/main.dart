@@ -75,6 +75,11 @@ class MultiSplitViewExampleState extends State<MultiSplitViewExample> {
                   child: const Text('Add size')),
               ElevatedButton(
                   onPressed: _controller.areasCount != 0
+                      ? _onUpdateFirstButtonClick
+                      : null,
+                  child: const Text('Update first')),
+              ElevatedButton(
+                  onPressed: _controller.areasCount != 0
                       ? _onRemoveFirstButtonClick
                       : null,
                   child: const Text('Remove first')),
@@ -122,6 +127,11 @@ class MultiSplitViewExampleState extends State<MultiSplitViewExample> {
         155 + random.nextInt(100), 155 + random.nextInt(100));
   }
 
+  double _randomWidth(double from, double to) {
+    Random random = Random();
+    return from + random.nextDouble() * (to - from);
+  }
+
   _onDividerDragStart(int index) {
     if (kDebugMode) {
       print('drag start: $index');
@@ -137,6 +147,14 @@ class MultiSplitViewExampleState extends State<MultiSplitViewExample> {
   _onDividerDragUpdate(int index) {
     if (kDebugMode) {
       print('drag update: $index');
+    }
+  }
+
+  _onUpdateFirstButtonClick() {
+    if (_controller.areasCount != 0) {
+      final area = _controller.areas.first.copyWith(
+          data: _randomColor(), size: _randomWidth(100, 600), min: 100);
+      _controller.updateArea(0, area);
     }
   }
 
