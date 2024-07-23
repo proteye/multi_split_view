@@ -89,6 +89,8 @@ class MultiSplitViewExampleState extends State<MultiSplitViewExample> {
     Widget? content;
     if (_controller.areasCount != 0) {
       MultiSplitView multiSplitView = MultiSplitView(
+          onDividerDragStart: _onDividerDragStart,
+          onDividerDragEnd: _onDividerDragEnd,
           onDividerDragUpdate: _onDividerDragUpdate,
           onDividerTap: _onDividerTap,
           onDividerDoubleTap: _onDividerDoubleTap,
@@ -120,9 +122,21 @@ class MultiSplitViewExampleState extends State<MultiSplitViewExample> {
         155 + random.nextInt(100), 155 + random.nextInt(100));
   }
 
+  _onDividerDragStart(int index) {
+    if (kDebugMode) {
+      print('drag start: $index');
+    }
+  }
+
+  _onDividerDragEnd(int index) {
+    if (kDebugMode) {
+      print('drag end: $index');
+    }
+  }
+
   _onDividerDragUpdate(int index) {
     if (kDebugMode) {
-      // print('drag update: $index');
+      print('drag update: $index');
     }
   }
 
