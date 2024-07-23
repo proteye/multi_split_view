@@ -104,12 +104,18 @@ class Area {
     double? min,
     double? max,
   }) {
+    if (size != null && flex != null) {
+      throw ArgumentError('Cannot provide both a size and a flex.');
+    }
+
     return Area(
       id: id ?? this.id,
-      size: size ?? this.size,
-      flex: flex ?? this.flex,
+      size: size == null && flex == null ? this.size : size,
+      flex: size == null && flex == null ? this.flex : flex,
       min: min ?? this.min,
       max: max ?? this.max,
+      data: data,
+      builder: builder,
     );
   }
 }
