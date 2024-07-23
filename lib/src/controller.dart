@@ -117,6 +117,12 @@ class MultiSplitViewController extends ChangeNotifier {
     notifyListeners();
   }
 
+  void updateArea(int index, Area area) {
+    _areas[index] = area;
+    _updateAreas();
+    notifyListeners();
+  }
+
   int get areasCount => _areas.length;
 
   /// Gets the area of a given widget index.

@@ -93,13 +93,16 @@ void main() {
 
         final area2 = area.copyWith(
           id: '2',
+          min: 150,
+          max: 650,
+          data: 'data2',
         );
         expect(area2.id, '2');
         expect(area2.size, 200);
         expect(area2.flex, null);
-        expect(area2.min, 100);
-        expect(area2.max, 300);
-        expect(area2.data, 'data');
+        expect(area2.min, 150);
+        expect(area2.max, 650);
+        expect(area2.data, 'data2');
         expect(area2.builder, builder);
 
         final area3 = area2.copyWith(
@@ -108,9 +111,9 @@ void main() {
         expect(area3.id, '2');
         expect(area3.size, null);
         expect(area3.flex, 200);
-        expect(area3.min, 100);
-        expect(area3.max, 300);
-        expect(area3.data, 'data');
+        expect(area3.min, 150);
+        expect(area3.max, 650);
+        expect(area3.data, 'data2');
         expect(area3.builder, builder);
       });
       test('copyWith failed', () {

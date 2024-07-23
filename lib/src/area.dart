@@ -103,6 +103,8 @@ class Area {
     double? flex,
     double? min,
     double? max,
+    dynamic data,
+    AreaWidgetBuilder? builder,
   }) {
     if (size != null && flex != null) {
       throw ArgumentError('Cannot provide both a size and a flex.');
@@ -114,8 +116,8 @@ class Area {
       flex: size == null && flex == null ? this.flex : flex,
       min: min ?? this.min,
       max: max ?? this.max,
-      data: data,
-      builder: builder,
+      data: data ?? this.data,
+      builder: builder ?? this.builder,
     );
   }
 }
