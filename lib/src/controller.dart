@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
-import 'package:multi_split_view/src/area.dart';
+import 'package:multi_split_view_next/src/area.dart';
 
 /// Controller for [MultiSplitView].
 ///

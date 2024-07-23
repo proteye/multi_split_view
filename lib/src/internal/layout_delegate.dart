@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
-import 'package:multi_split_view/multi_split_view.dart';
-import 'package:multi_split_view/src/internal/layout_constraints.dart';
+import 'package:multi_split_view_next/multi_split_view_next.dart';
+import 'package:multi_split_view_next/src/internal/layout_constraints.dart';
 
 @internal
 class LayoutDelegate extends MultiChildLayoutDelegate {

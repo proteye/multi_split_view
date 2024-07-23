@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:multi_split_view/multi_split_view.dart';
+import 'package:multi_split_view_next/multi_split_view_next.dart';
 
 void main() => runApp(const MultiSplitViewExampleApp());
 

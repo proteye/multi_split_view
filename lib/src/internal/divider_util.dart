@@ -1,10 +1,10 @@
 import 'dart:math' as math;
 
 import 'package:meta/meta.dart';
-import 'package:multi_split_view/src/area.dart';
-import 'package:multi_split_view/src/controller.dart';
-import 'package:multi_split_view/src/internal/layout_constraints.dart';
-import 'package:multi_split_view/src/internal/num_util.dart';
+import 'package:multi_split_view_next/src/area.dart';
+import 'package:multi_split_view_next/src/controller.dart';
+import 'package:multi_split_view_next/src/internal/layout_constraints.dart';
+import 'package:multi_split_view_next/src/internal/num_util.dart';
 
 /// Represents divider util used by the [MultiSplitView].
 @internal
