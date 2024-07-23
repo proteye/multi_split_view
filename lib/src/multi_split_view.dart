@@ -25,6 +25,8 @@ class MultiSplitView extends StatefulWidget {
       this.axis = MultiSplitView.defaultAxis,
       this.controller,
       this.dividerBuilder,
+      this.onDividerDragStart,
+      this.onDividerDragEnd,
       this.onDividerDragUpdate,
       this.onDividerTap,
       this.onDividerDoubleTap,
@@ -63,6 +65,12 @@ class MultiSplitView extends StatefulWidget {
 
   /// Indicates whether it is resizable. The default value is [TRUE].
   final bool resizable;
+
+  /// Function to listen divider dragging.
+  final OnDividerDragUpdate? onDividerDragStart;
+
+  /// Function to listen divider dragging.
+  final OnDividerDragUpdate? onDividerDragEnd;
 
   /// Function to listen divider dragging.
   final OnDividerDragUpdate? onDividerDragUpdate;
@@ -283,9 +291,13 @@ class _MultiSplitViewState extends State<MultiSplitView> {
                           onHorizontalDragCancel: widget.axis == Axis.vertical
                               ? null
                               : () => _onDragCancel(),
+                          onHorizontalDragStart: widget.axis == Axis.vertical
+                              ? null
+                              : (detail) =>
+                                  _onDragStart(index, controllerHelper),
                           onHorizontalDragEnd: widget.axis == Axis.vertical
                               ? null
-                              : (detail) => _onDragEnd(),
+                              : (detail) => _onDragEnd(index, controllerHelper),
                           onHorizontalDragUpdate: widget.axis == Axis.vertical
                               ? null
                               : (detail) => _onDragUpdate(
@@ -296,9 +308,13 @@ class _MultiSplitViewState extends State<MultiSplitView> {
                           onVerticalDragCancel: widget.axis == Axis.horizontal
                               ? null
                               : () => _onDragCancel(),
+                          onVerticalDragStart: widget.axis == Axis.horizontal
+                              ? null
+                              : (detail) =>
+                                  _onDragStart(index, controllerHelper),
                           onVerticalDragEnd: widget.axis == Axis.horizontal
                               ? null
-                              : (detail) => _onDragEnd(),
+                              : (detail) => _onDragEnd(index, controllerHelper),
                           onVerticalDragUpdate: widget.axis == Axis.horizontal
                               ? null
                               : (detail) => _onDragUpdate(
@@ -408,13 +424,27 @@ class _MultiSplitViewState extends State<MultiSplitView> {
     });
   }
 
-  void _onDragEnd() {
+  void _onDragStart(int index, ControllerHelper controllerHelper) {
+    if (_draggingDivider == null) {
+      return;
+    }
+    controllerHelper.notifyListeners();
+    if (widget.onDividerDragStart != null) {
+      Future.delayed(Duration.zero, () => widget.onDividerDragStart!(index));
+    }
+  }
+
+  void _onDragEnd(int index, ControllerHelper controllerHelper) {
     if (_draggingDivider == null) {
       return;
     }
     setState(() {
       _draggingDivider = null;
     });
+    controllerHelper.notifyListeners();
+    if (widget.onDividerDragEnd != null) {
+      Future.delayed(Duration.zero, () => widget.onDividerDragEnd!(index));
+    }
   }
 
   /// Wraps the divider widget with a [MouseRegion].
