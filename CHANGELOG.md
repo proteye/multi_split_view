@@ -1,3 +1,8 @@
+## 3.2.6
+
+* `MultiSplitView`
+  * Added `dividerGrabbingSize` parameter to `MultiSplitViewThemeData`.
+
 ## 3.2.5
 
 * `MultiSplitViewController`
