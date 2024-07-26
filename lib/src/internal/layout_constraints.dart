@@ -223,7 +223,7 @@ class LayoutConstraints {
             (onlyOnIndex == null || onlyOnIndex == index)) {
           onDividerLayout(
               index: index,
-              start: start - (dividerGrabbingSize),
+              start: start - dividerGrabbingSize + dividerThickness,
               thickness: dividerGrabbingSize);
         }
         start += dividerThickness;

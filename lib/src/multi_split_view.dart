@@ -320,7 +320,7 @@ class _MultiSplitViewState extends State<MultiSplitView> {
                                 _onDragUpdate(detail, index, controllerHelper),
                         child: _GrabbingZone(
                           axis: widget.axis,
-                          size: themeData.dividerGrabbingSize,
+                          dividerThickness: themeData.dividerThickness,
                           child: dividerWidget,
                         ),
                       );
@@ -484,24 +484,24 @@ class _DraggingDivider {
 
 class _GrabbingZone extends StatelessWidget {
   const _GrabbingZone({
-    required this.size,
     required this.axis,
+    required this.dividerThickness,
     required this.child,
   });
 
-  final double size;
   final Axis axis;
+  final double dividerThickness;
   final Widget child;
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-        width: axis == Axis.horizontal ? size : double.infinity,
-        height: axis == Axis.vertical ? size : double.infinity,
-        child: ColoredBox(
-          color: Colors.red,
-          child: Center(
-            child: child,
-          ),
+  Widget build(BuildContext context) => Align(
+        alignment: axis == Axis.horizontal
+            ? Alignment.centerRight
+            : Alignment.bottomCenter,
+        child: SizedBox(
+          width: axis == Axis.horizontal ? dividerThickness : double.infinity,
+          height: axis == Axis.vertical ? dividerThickness : double.infinity,
+          child: child,
         ),
       );
 }
