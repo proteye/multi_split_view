@@ -94,6 +94,7 @@ class MultiSplitViewExampleState extends State<MultiSplitViewExample> {
     Widget? content;
     if (_controller.areasCount != 0) {
       MultiSplitView multiSplitView = MultiSplitView(
+          axis: Axis.horizontal,
           onDividerDragStart: _onDividerDragStart,
           onDividerDragEnd: _onDividerDragEnd,
           onDividerDragUpdate: _onDividerDragUpdate,
@@ -108,7 +109,10 @@ class MultiSplitViewExampleState extends State<MultiSplitViewExample> {
           padding: const EdgeInsets.all(16),
           child: MultiSplitViewTheme(
               data: MultiSplitViewThemeData(
-                  dividerPainter: DividerPainters.grooved2()),
+                dividerThickness: 10,
+                dividerGrabbingSize: 30,
+                dividerPainter: DividerPainters.grooved2(),
+              ),
               child: multiSplitView));
     } else {
       content = const Center(child: Text('Empty'));
