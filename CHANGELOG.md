@@ -1,3 +1,8 @@
+## 3.3.1
+
+* `MultiSplitView`
+  * Added `clipBehavior` parameter.
+
 ## 3.3.0
 
 * `Area`

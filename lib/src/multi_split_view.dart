@@ -37,6 +37,7 @@ class MultiSplitView extends StatefulWidget {
       this.sizeOverflowPolicy = SizeOverflowPolicy.shrinkLast,
       this.sizeUnderflowPolicy = SizeUnderflowPolicy.stretchLast,
       this.minSizeRecoveryPolicy = MinSizeRecoveryPolicy.firstToLast,
+      this.clipBehavior = Clip.hardEdge,
       this.fallbackWidth = 500,
       this.fallbackHeight = 500,
       this.builder})
@@ -90,6 +91,11 @@ class MultiSplitView extends StatefulWidget {
   /// integer values. As a side effect, some areas may stretch or shrink
   /// slightly as the divider is dragged.
   final bool antiAliasingWorkaround;
+
+  /// Controls how to clip children.
+  ///
+  /// Defaults to [Clip.hardEdge].
+  final Clip clipBehavior;
 
   /// The width to use when it is in a situation with an unbounded width.
   ///
@@ -236,11 +242,16 @@ class _MultiSplitViewState extends State<MultiSplitView> {
                 ? HitTestBehavior.opaque
                 : HitTestBehavior.translucent);
         children.insert(
-            0,
-            LayoutId(
-                key: ValueKey(area.id),
-                id: index,
-                child: ClipRect(child: child)));
+          0,
+          LayoutId(
+            key: ValueKey(area.id),
+            id: index,
+            child: ClipRect(
+              clipBehavior: widget.clipBehavior,
+              child: child,
+            ),
+          ),
+        );
 
         // divisor widget
         // added last to ensure they are painted over ensuring the handle
