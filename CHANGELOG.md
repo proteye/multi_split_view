@@ -1,3 +1,7 @@
+## 3.3.2
+
+* Updated `README.md`.
+
 ## 3.3.1
 
 * `MultiSplitView`
