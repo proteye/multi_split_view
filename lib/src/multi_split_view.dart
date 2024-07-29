@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:multi_split_view_next/src/area.dart';
-import 'package:multi_split_view_next/src/area_widget_builder.dart';
-import 'package:multi_split_view_next/src/controller.dart';
-import 'package:multi_split_view_next/src/divider_tap_typedefs.dart';
-import 'package:multi_split_view_next/src/divider_widget.dart';
-import 'package:multi_split_view_next/src/internal/divider_util.dart';
-import 'package:multi_split_view_next/src/internal/layout_constraints.dart';
-import 'package:multi_split_view_next/src/internal/layout_delegate.dart';
-import 'package:multi_split_view_next/src/policies.dart';
-import 'package:multi_split_view_next/src/theme_data.dart';
-import 'package:multi_split_view_next/src/theme_widget.dart';
+import 'package:flutter/widgets.dart';
+import 'package:multi_split_view/src/area.dart';
+import 'package:multi_split_view/src/area_widget_builder.dart';
+import 'package:multi_split_view/src/controller.dart';
+import 'package:multi_split_view/src/divider_tap_typedefs.dart';
+import 'package:multi_split_view/src/divider_widget.dart';
+import 'package:multi_split_view/src/internal/divider_util.dart';
+import 'package:multi_split_view/src/internal/layout_constraints.dart';
+import 'package:multi_split_view/src/internal/layout_delegate.dart';
+import 'package:multi_split_view/src/policies.dart';
+import 'package:multi_split_view/src/theme_data.dart';
+import 'package:multi_split_view/src/theme_widget.dart';
 
 /// A widget to provides horizontal or vertical multiple split view.
 class MultiSplitView extends StatefulWidget {
@@ -25,8 +26,8 @@ class MultiSplitView extends StatefulWidget {
       this.controller,
       this.dividerBuilder,
       this.onDividerDragStart,
-      this.onDividerDragEnd,
       this.onDividerDragUpdate,
+      this.onDividerDragEnd,
       this.onDividerTap,
       this.onDividerDoubleTap,
       this.resizable = true,
@@ -36,7 +37,6 @@ class MultiSplitView extends StatefulWidget {
       this.sizeOverflowPolicy = SizeOverflowPolicy.shrinkLast,
       this.sizeUnderflowPolicy = SizeUnderflowPolicy.stretchLast,
       this.minSizeRecoveryPolicy = MinSizeRecoveryPolicy.firstToLast,
-      this.clipBehavior = Clip.hardEdge,
       this.fallbackWidth = 500,
       this.fallbackHeight = 500,
       this.builder})
@@ -65,14 +65,14 @@ class MultiSplitView extends StatefulWidget {
   /// Indicates whether it is resizable. The default value is [TRUE].
   final bool resizable;
 
-  /// Function to listen divider dragging.
-  final OnDividerDragUpdate? onDividerDragStart;
+  /// Function to listen to divider dragging start.
+  final OnDividerDragEvent? onDividerDragStart;
 
-  /// Function to listen divider dragging.
-  final OnDividerDragUpdate? onDividerDragEnd;
+  /// Function to listen to divider dragging update.
+  final OnDividerDragEvent? onDividerDragUpdate;
 
-  /// Function to listen divider dragging.
-  final OnDividerDragUpdate? onDividerDragUpdate;
+  /// Function to listen to divider dragging end.
+  final OnDividerDragEvent? onDividerDragEnd;
 
   /// Represents the policy for handling overflow of non-flexible areas within
   /// a container.
@@ -90,11 +90,6 @@ class MultiSplitView extends StatefulWidget {
   /// integer values. As a side effect, some areas may stretch or shrink
   /// slightly as the divider is dragged.
   final bool antiAliasingWorkaround;
-
-  /// Controls how to clip children.
-  ///
-  /// Defaults to [Clip.hardEdge].
-  final Clip clipBehavior;
 
   /// The width to use when it is in a situation with an unbounded width.
   ///
@@ -199,11 +194,10 @@ class _MultiSplitViewState extends State<MultiSplitView> {
         _lastAreasUpdateHash = controllerHelper.areasUpdateHash;
 
         _layoutConstraints = LayoutConstraints(
-          controller: _controller,
-          containerSize: containerSize,
-          dividerThickness: themeData.dividerThickness,
-          dividerGrabbingSize: themeData.dividerGrabbingSize,
-        );
+            controller: _controller,
+            containerSize: containerSize,
+            dividerThickness: themeData.dividerThickness,
+            dividerHandleBuffer: themeData.dividerHandleBuffer);
         _layoutConstraints!.adjustAreas(
             controllerHelper: controllerHelper,
             sizeOverflowPolicy: widget.sizeOverflowPolicy,
@@ -241,18 +235,16 @@ class _MultiSplitViewState extends State<MultiSplitView> {
             hitTestBehavior: _draggingDivider != null
                 ? HitTestBehavior.opaque
                 : HitTestBehavior.translucent);
-        children.add(
-          LayoutId(
-            key: ValueKey(area.id),
-            id: index,
-            child: ClipRect(
-              clipBehavior: widget.clipBehavior,
-              child: child,
-            ),
-          ),
-        );
+        children.insert(
+            0,
+            LayoutId(
+                key: ValueKey(area.id),
+                id: index,
+                child: ClipRect(child: child)));
 
-        // Divider widget
+        // divisor widget
+        // added last to ensure they are painted over ensuring the handle
+        // buffer is not below the area.
         if (index < _controller.areasCount - 1) {
           children.add(LayoutId(
               id: 'd$index',
@@ -282,48 +274,55 @@ class _MultiSplitViewState extends State<MultiSplitView> {
                             resizable: widget.resizable,
                             dragging: _draggingDivider?.index == index);
                     if (widget.resizable) {
+                      if (themeData.dividerHandleBuffer > 0) {
+                        // handle buffer around the divider
+                        double lr = widget.axis == Axis.vertical
+                            ? 0
+                            : themeData.dividerHandleBuffer;
+                        double tb = widget.axis == Axis.horizontal
+                            ? 0
+                            : themeData.dividerHandleBuffer;
+                        dividerWidget = Padding(
+                            padding: EdgeInsets.fromLTRB(lr, tb, lr, tb),
+                            child: dividerWidget);
+                      }
                       dividerWidget = GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () => _onDividerTap(index),
-                        onDoubleTap: () => _onDividerDoubleTap(index),
-                        onHorizontalDragDown: widget.axis == Axis.vertical
-                            ? null
-                            : (detail) => _onDragDown(detail, index),
-                        onHorizontalDragCancel: widget.axis == Axis.vertical
-                            ? null
-                            : () => _onDragCancel(),
-                        onHorizontalDragStart: widget.axis == Axis.vertical
-                            ? null
-                            : (detail) => _onDragStart(index, controllerHelper),
-                        onHorizontalDragEnd: widget.axis == Axis.vertical
-                            ? null
-                            : (detail) => _onDragEnd(index, controllerHelper),
-                        onHorizontalDragUpdate: widget.axis == Axis.vertical
-                            ? null
-                            : (detail) =>
-                                _onDragUpdate(detail, index, controllerHelper),
-                        onVerticalDragDown: widget.axis == Axis.horizontal
-                            ? null
-                            : (detail) => _onDragDown(detail, index),
-                        onVerticalDragCancel: widget.axis == Axis.horizontal
-                            ? null
-                            : () => _onDragCancel(),
-                        onVerticalDragStart: widget.axis == Axis.horizontal
-                            ? null
-                            : (detail) => _onDragStart(index, controllerHelper),
-                        onVerticalDragEnd: widget.axis == Axis.horizontal
-                            ? null
-                            : (detail) => _onDragEnd(index, controllerHelper),
-                        onVerticalDragUpdate: widget.axis == Axis.horizontal
-                            ? null
-                            : (detail) =>
-                                _onDragUpdate(detail, index, controllerHelper),
-                        child: _GrabbingZone(
-                          axis: widget.axis,
-                          dividerThickness: themeData.dividerThickness,
-                          child: dividerWidget,
-                        ),
-                      );
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () => _onDividerTap(index),
+                          onDoubleTap: () => _onDividerDoubleTap(index),
+                          onHorizontalDragDown: widget.axis == Axis.vertical
+                              ? null
+                              : (detail) => _onDragDown(detail, index),
+                          onHorizontalDragStart: widget.axis == Axis.vertical
+                              ? null
+                              : (detail) => _onDragStart(index),
+                          onHorizontalDragCancel: widget.axis == Axis.vertical
+                              ? null
+                              : () => _onDragCancel(),
+                          onHorizontalDragEnd: widget.axis == Axis.vertical
+                              ? null
+                              : (detail) => _onDragEnd(index),
+                          onHorizontalDragUpdate: widget.axis == Axis.vertical
+                              ? null
+                              : (detail) => _onDragUpdate(
+                                  detail, index, controllerHelper),
+                          onVerticalDragDown: widget.axis == Axis.horizontal
+                              ? null
+                              : (detail) => _onDragDown(detail, index),
+                          onVerticalDragStart: widget.axis == Axis.horizontal
+                              ? null
+                              : (detail) => _onDragStart(index),
+                          onVerticalDragCancel: widget.axis == Axis.horizontal
+                              ? null
+                              : () => _onDragCancel(),
+                          onVerticalDragEnd: widget.axis == Axis.horizontal
+                              ? null
+                              : (detail) => _onDragEnd(index),
+                          onVerticalDragUpdate: widget.axis == Axis.horizontal
+                              ? null
+                              : (detail) => _onDragUpdate(
+                                  detail, index, controllerHelper),
+                          child: dividerWidget);
                       dividerWidget = _mouseRegion(
                           index: index,
                           axis: widget.axis == Axis.horizontal
@@ -428,24 +427,22 @@ class _MultiSplitViewState extends State<MultiSplitView> {
     });
   }
 
-  void _onDragStart(int index, ControllerHelper controllerHelper) {
+  void _onDragStart(int index) {
     if (_draggingDivider == null) {
       return;
     }
-    controllerHelper.notifyListeners();
     if (widget.onDividerDragStart != null) {
       Future.delayed(Duration.zero, () => widget.onDividerDragStart!(index));
     }
   }
 
-  void _onDragEnd(int index, ControllerHelper controllerHelper) {
+  void _onDragEnd(int index) {
     if (_draggingDivider == null) {
       return;
     }
     setState(() {
       _draggingDivider = null;
     });
-    controllerHelper.notifyListeners();
     if (widget.onDividerDragEnd != null) {
       Future.delayed(Duration.zero, () => widget.onDividerDragEnd!(index));
     }
@@ -482,31 +479,7 @@ class _DraggingDivider {
   final double initialInnerPos;
 }
 
-class _GrabbingZone extends StatelessWidget {
-  const _GrabbingZone({
-    required this.axis,
-    required this.dividerThickness,
-    required this.child,
-  });
-
-  final Axis axis;
-  final double dividerThickness;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) => Align(
-        alignment: axis == Axis.horizontal
-            ? Alignment.centerRight
-            : Alignment.bottomCenter,
-        child: SizedBox(
-          width: axis == Axis.horizontal ? dividerThickness : double.infinity,
-          height: axis == Axis.vertical ? dividerThickness : double.infinity,
-          child: child,
-        ),
-      );
-}
-
 typedef DividerBuilder = Widget Function(Axis axis, int index, bool resizable,
     bool dragging, bool highlighted, MultiSplitViewThemeData themeData);
 
-typedef OnDividerDragUpdate = void Function(int index);
+typedef OnDividerDragEvent = void Function(int index);

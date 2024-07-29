@@ -1,16 +1,16 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:multi_split_view_next/src/area.dart';
-import 'package:multi_split_view_next/src/controller.dart';
-import 'package:multi_split_view_next/src/internal/divider_util.dart';
-import 'package:multi_split_view_next/src/internal/layout_constraints.dart';
-import 'package:multi_split_view_next/src/policies.dart';
+import 'package:multi_split_view/src/area.dart';
+import 'package:multi_split_view/src/controller.dart';
+import 'package:multi_split_view/src/internal/divider_util.dart';
+import 'package:multi_split_view/src/internal/layout_constraints.dart';
+import 'package:multi_split_view/src/policies.dart';
 
 class TestHelper {
   factory TestHelper(
       {required List<Area> areas,
       required double containerSize,
       required double dividerThickness,
-      required double dividerGrabbingSize,
+      required double dividerHandleBuffer,
       SizeOverflowPolicy sizeOverflowPolicy = SizeOverflowPolicy.shrinkLast,
       SizeUnderflowPolicy sizeUnderflowPolicy = SizeUnderflowPolicy.stretchLast,
       MinSizeRecoveryPolicy minSizeRecoveryPolicy =
@@ -21,7 +21,7 @@ class TestHelper {
         controller: controller,
         containerSize: containerSize,
         dividerThickness: dividerThickness,
-        dividerGrabbingSize: dividerGrabbingSize);
+        dividerHandleBuffer: dividerHandleBuffer);
     ControllerHelper controllerHelper = ControllerHelper(controller);
     layout.adjustAreas(
         controllerHelper: controllerHelper,

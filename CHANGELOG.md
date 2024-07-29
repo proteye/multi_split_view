@@ -1,24 +1,12 @@
-## 3.2.6
-
-* `MultiSplitView`
-  * Added `dividerGrabbingSize` parameter to `MultiSplitViewThemeData`.
-
-## 3.2.5
-
-* `MultiSplitViewController`
-  * Added `updateArea` method.
-
-## 3.2.4
+## 3.3.0
 
 * `Area`
   * Added `copyWith` method.
 * `MultiSplitView`
   * Added `onDividerDragStart` and `onDividerDragEnd` callbacks.
-
-## 3.2.3
-
-* `MultiSplitView`
-  * Added `clipBehavior` parameter to control children's clip.
+* `MultiSplitViewThemeData`
+  * Allows divider without thickness.
+  * Allows increasing the handle area around the divider.
 
 ## 3.2.2
 

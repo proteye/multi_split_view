@@ -1,22 +1,21 @@
 import 'dart:math' as math;
 
 import 'package:meta/meta.dart';
-import 'package:multi_split_view_next/multi_split_view_next.dart';
-import 'package:multi_split_view_next/src/area.dart';
-import 'package:multi_split_view_next/src/controller.dart';
-import 'package:multi_split_view_next/src/internal/num_util.dart';
+import 'package:multi_split_view/multi_split_view.dart';
+import 'package:multi_split_view/src/area.dart';
+import 'package:multi_split_view/src/controller.dart';
+import 'package:multi_split_view/src/internal/num_util.dart';
 
 /// Represents the layout constraints used by the [MultiSplitView].
 @internal
 class LayoutConstraints {
-  factory LayoutConstraints({
-    required final MultiSplitViewController controller,
-    required final double containerSize,
-    required final double dividerThickness,
-    required final double dividerGrabbingSize,
-  }) {
+  factory LayoutConstraints(
+      {required final MultiSplitViewController controller,
+      required final double containerSize,
+      required final double dividerThickness,
+      required final double dividerHandleBuffer}) {
     NumUtil.validateDouble('dividerThickness', dividerThickness);
-    NumUtil.validateDouble('dividerGrabbingSize', dividerGrabbingSize);
+    NumUtil.validateDouble('dividerHandleBuffer', dividerHandleBuffer);
     NumUtil.validateDouble('containerSize', containerSize);
     final double totalDividerSize = controller.areasCount > 1
         ? (controller.areasCount - 1) * dividerThickness
@@ -25,7 +24,7 @@ class LayoutConstraints {
     return LayoutConstraints._(
         containerSize: containerSize,
         dividerThickness: dividerThickness,
-        dividerGrabbingSize: dividerGrabbingSize,
+        dividerHandleBuffer: dividerHandleBuffer,
         totalDividerSize: totalDividerSize,
         spaceForAreas: NumUtil.fix('spaceForAreas', spaceForAreas));
   }
@@ -33,12 +32,12 @@ class LayoutConstraints {
   LayoutConstraints._(
       {required double containerSize,
       required double dividerThickness,
-      required double dividerGrabbingSize,
+      required double dividerHandleBuffer,
       required double totalDividerSize,
       required double spaceForAreas})
       : containerSize = containerSize,
         dividerThickness = dividerThickness,
-        dividerGrabbingSize = dividerGrabbingSize,
+        dividerHandleBuffer = dividerHandleBuffer,
         totalDividerSize = totalDividerSize,
         spaceForAreas = spaceForAreas;
 
@@ -48,8 +47,8 @@ class LayoutConstraints {
   /// The divider thickness defined by the theme.
   final double dividerThickness;
 
-  /// The divider grabbing size defined by the theme.
-  final double dividerGrabbingSize;
+  /// The additional clickable area around the divider defined by the theme.
+  final double dividerHandleBuffer;
 
   /// The total size of all dividers.
   final double totalDividerSize;
@@ -217,14 +216,13 @@ class LayoutConstraints {
         onAreaLayout(index: index, start: start, thickness: thickness);
       }
       start += thickness;
-
       if (index < controller.areasCount - 1) {
         if (onDividerLayout != null &&
             (onlyOnIndex == null || onlyOnIndex == index)) {
           onDividerLayout(
               index: index,
-              start: start - dividerGrabbingSize + dividerThickness,
-              thickness: dividerGrabbingSize);
+              start: start - dividerHandleBuffer,
+              thickness: dividerThickness + (2 * dividerHandleBuffer));
         }
         start += dividerThickness;
       }

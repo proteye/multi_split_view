@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:multi_split_view_next/multi_split_view_next.dart';
+import 'package:multi_split_view/multi_split_view.dart';
 
 import 'test_helper.dart';
 
@@ -16,7 +16,7 @@ void main() {
                 ],
                 containerSize: 110,
                 dividerThickness: 10,
-                dividerGrabbingSize: 5,
+                dividerHandleBuffer: 0,
                 sizeUnderflowPolicy: SizeUnderflowPolicy.stretchLast);
 
             helper.moveAndTest(
@@ -35,7 +35,7 @@ void main() {
                 ],
                 containerSize: 110,
                 dividerThickness: 10,
-                dividerGrabbingSize: 10,
+                dividerHandleBuffer: 0,
                 sizeUnderflowPolicy: SizeUnderflowPolicy.stretchLast);
 
             helper.moveAndTest(
@@ -54,7 +54,7 @@ void main() {
                 ],
                 containerSize: 110,
                 dividerThickness: 10,
-                dividerGrabbingSize: 10,
+                dividerHandleBuffer: 0,
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkLast);
 
             helper.moveAndTest(
@@ -73,7 +73,7 @@ void main() {
                 ],
                 containerSize: 110,
                 dividerThickness: 10,
-                dividerGrabbingSize: 10,
+                dividerHandleBuffer: 0,
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkLast);
 
             helper.moveAndTest(
@@ -91,7 +91,7 @@ void main() {
                 areas: [Area(data: 'a', size: 200), Area(data: 'b', flex: 1)],
                 containerSize: 310,
                 dividerThickness: 10,
-                dividerGrabbingSize: 10);
+                dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 0, pixels: -100, pushDividers: false, rest: 0);
@@ -106,7 +106,7 @@ void main() {
                 areas: [Area(data: 'a', size: 50), Area(data: 'b', flex: 1)],
                 containerSize: 105,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5);
+                dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 0, pixels: 200, pushDividers: false, rest: 0);
@@ -123,7 +123,7 @@ void main() {
                 areas: [Area(data: 'a', flex: 1), Area(data: 'b', flex: 1)],
                 containerSize: 110,
                 dividerThickness: 10,
-                dividerGrabbingSize: 10);
+                dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 0, pixels: 0, pushDividers: false, rest: 0);
@@ -138,7 +138,7 @@ void main() {
                 areas: [Area(data: 'a', flex: 1), Area(data: 'b', flex: 1)],
                 containerSize: 110,
                 dividerThickness: 10,
-                dividerGrabbingSize: 10);
+                dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 0, pixels: -1, pushDividers: false, rest: 0);
@@ -153,7 +153,7 @@ void main() {
                 areas: [Area(data: 'a', flex: 1), Area(data: 'b', flex: 1)],
                 containerSize: 110,
                 dividerThickness: 10,
-                dividerGrabbingSize: 10);
+                dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 0, pixels: 1, pushDividers: false, rest: 0);
@@ -168,7 +168,7 @@ void main() {
                 areas: [Area(data: 'a', flex: 1), Area(data: 'b', flex: 1)],
                 containerSize: 110,
                 dividerThickness: 10,
-                dividerGrabbingSize: 10);
+                dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 0, pixels: -200, pushDividers: false, rest: -150);
@@ -183,7 +183,7 @@ void main() {
                 areas: [Area(data: 'a', flex: 1), Area(data: 'b', flex: 1)],
                 containerSize: 110,
                 dividerThickness: 10,
-                dividerGrabbingSize: 10);
+                dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 0, pixels: 200, pushDividers: false, rest: 150);
@@ -202,7 +202,7 @@ void main() {
               Area(data: 'a', size: 100),
               Area(data: 'b', flex: 1),
               Area(data: 'c', flex: 1)
-            ], containerSize: 110, dividerThickness: 5, dividerGrabbingSize: 5);
+            ], containerSize: 110, dividerThickness: 5, dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 1, pixels: 20, pushDividers: false, rest: 0);
@@ -219,7 +219,7 @@ void main() {
               Area(data: 'a', size: 100),
               Area(data: 'b', flex: 1),
               Area(data: 'c', flex: 3)
-            ], containerSize: 510, dividerThickness: 5, dividerGrabbingSize: 5);
+            ], containerSize: 510, dividerThickness: 5, dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 0, pixels: -20, pushDividers: false, rest: 0);
@@ -238,7 +238,7 @@ void main() {
               Area(data: 'a', flex: 1),
               Area(data: 'b', size: 100),
               Area(data: 'c', flex: 3)
-            ], containerSize: 510, dividerThickness: 5, dividerGrabbingSize: 5);
+            ], containerSize: 510, dividerThickness: 5, dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 0, pixels: -20, pushDividers: false, rest: 0);
@@ -257,7 +257,7 @@ void main() {
               Area(data: 'a', size: 50),
               Area(data: 'b', size: 50),
               Area(data: 'c', flex: 1)
-            ], containerSize: 110, dividerThickness: 5, dividerGrabbingSize: 5);
+            ], containerSize: 110, dividerThickness: 5, dividerHandleBuffer: 0);
 
             helper.moveAndTest(
                 dividerIndex: 0, pixels: -20, pushDividers: false, rest: 0);

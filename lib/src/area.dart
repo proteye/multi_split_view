@@ -1,8 +1,8 @@
 import 'dart:math' as math;
 
 import 'package:meta/meta.dart';
-import 'package:multi_split_view_next/src/area_widget_builder.dart';
-import 'package:multi_split_view_next/src/internal/num_util.dart';
+import 'package:multi_split_view/src/area_widget_builder.dart';
+import 'package:multi_split_view/src/internal/num_util.dart';
 
 /// Child area in the [MultiSplitView].
 ///
@@ -106,10 +106,6 @@ class Area {
     dynamic data,
     AreaWidgetBuilder? builder,
   }) {
-    if (size != null && flex != null) {
-      throw ArgumentError('Cannot provide both a size and a flex.');
-    }
-
     return Area(
       id: id ?? this.id,
       size: size == null && flex == null ? this.size : size,

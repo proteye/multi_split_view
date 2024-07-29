@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:multi_split_view_next/src/area.dart';
-import 'package:multi_split_view_next/src/controller.dart';
-import 'package:multi_split_view_next/src/internal/layout_constraints.dart';
-import 'package:multi_split_view_next/src/policies.dart';
+import 'package:multi_split_view/src/area.dart';
+import 'package:multi_split_view/src/controller.dart';
+import 'package:multi_split_view/src/internal/layout_constraints.dart';
+import 'package:multi_split_view/src/policies.dart';
 
 import 'test_helper.dart';
 
@@ -16,7 +16,7 @@ void main() {
                 controller: controller,
                 containerSize: 155,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: ControllerHelper(controller),
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkFirst,
@@ -35,7 +35,7 @@ void main() {
                 controller: controller,
                 containerSize: 205,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: controllerHelper,
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkFirst,
@@ -59,7 +59,7 @@ void main() {
                 controller: controller,
                 containerSize: 204.999999999,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: controllerHelper,
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkFirst,
@@ -83,7 +83,7 @@ void main() {
                 controller: controller,
                 containerSize: 204.5,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: controllerHelper,
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkFirst,
@@ -107,7 +107,7 @@ void main() {
                 controller: controller,
                 containerSize: 205.000000001,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: controllerHelper,
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkFirst,
@@ -131,7 +131,7 @@ void main() {
                 controller: controller,
                 containerSize: 205.5,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: controllerHelper,
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkFirst,
@@ -153,7 +153,7 @@ void main() {
                 controller: controller,
                 containerSize: 155,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: ControllerHelper(controller),
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkFirst,
@@ -174,7 +174,7 @@ void main() {
                 controller: controller,
                 containerSize: 155,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: ControllerHelper(controller),
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkLast,
@@ -197,7 +197,7 @@ void main() {
                 controller: controller,
                 containerSize: 155,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: ControllerHelper(controller),
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkLast,
@@ -218,7 +218,7 @@ void main() {
                 controller: controller,
                 containerSize: 255,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: ControllerHelper(controller),
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkLast,
@@ -239,7 +239,7 @@ void main() {
                 controller: controller,
                 containerSize: 255,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: ControllerHelper(controller),
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkLast,
@@ -262,7 +262,7 @@ void main() {
                 controller: controller,
                 containerSize: 255,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: ControllerHelper(controller),
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkLast,
@@ -283,7 +283,7 @@ void main() {
                 controller: controller,
                 containerSize: 205,
                 dividerThickness: 5,
-                dividerGrabbingSize: 5)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: ControllerHelper(controller),
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkLast,
@@ -306,7 +306,7 @@ void main() {
                 controller: controller,
                 containerSize: 150,
                 dividerThickness: 0,
-                dividerGrabbingSize: 0)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: ControllerHelper(controller),
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkLast,
@@ -324,7 +324,7 @@ void main() {
                 controller: controller,
                 containerSize: 200,
                 dividerThickness: 0,
-                dividerGrabbingSize: 0)
+                dividerHandleBuffer: 0)
             .adjustAreas(
                 controllerHelper: ControllerHelper(controller),
                 sizeOverflowPolicy: SizeOverflowPolicy.shrinkLast,
