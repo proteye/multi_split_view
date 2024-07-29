@@ -1,10 +1,10 @@
 import 'dart:math' as math;
 
 import 'package:meta/meta.dart';
-import 'package:multi_split_view/multi_split_view.dart';
-import 'package:multi_split_view/src/area.dart';
-import 'package:multi_split_view/src/controller.dart';
-import 'package:multi_split_view/src/internal/num_util.dart';
+import 'package:multi_split_view_next/multi_split_view_next.dart';
+import 'package:multi_split_view_next/src/area.dart';
+import 'package:multi_split_view_next/src/controller.dart';
+import 'package:multi_split_view_next/src/internal/num_util.dart';
 
 /// Represents the layout constraints used by the [MultiSplitView].
 @internal

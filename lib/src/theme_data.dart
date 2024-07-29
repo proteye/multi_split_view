@@ -1,5 +1,5 @@
-import 'package:multi_split_view/src/divider_painter.dart';
-import 'package:multi_split_view/src/multi_split_view.dart';
+import 'package:multi_split_view_next/src/divider_painter.dart';
+import 'package:multi_split_view_next/src/multi_split_view.dart';
 
 /// The [MultiSplitView] theme.
 /// Defines the configuration of the overall visual [MultiSplitViewTheme] for a widget subtree within the app.

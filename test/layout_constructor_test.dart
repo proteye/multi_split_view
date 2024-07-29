@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:multi_split_view/multi_split_view.dart';
-import 'package:multi_split_view/src/internal/layout_constraints.dart';
+import 'package:multi_split_view_next/multi_split_view_next.dart';
+import 'package:multi_split_view_next/src/internal/layout_constraints.dart';
 
 void main() {
   group('LayoutConstraints', () {

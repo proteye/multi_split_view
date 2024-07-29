@@ -110,7 +110,7 @@ class MultiSplitViewExampleState extends State<MultiSplitViewExample> {
           child: MultiSplitViewTheme(
               data: MultiSplitViewThemeData(
                 dividerThickness: 10,
-                dividerGrabbingSize: 30,
+                dividerHandleBuffer: 15,
                 dividerPainter: DividerPainters.grooved2(),
               ),
               child: multiSplitView));

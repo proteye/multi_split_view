@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:multi_split_view/src/area.dart';
-import 'package:multi_split_view/src/controller.dart';
-import 'package:multi_split_view/src/internal/layout_constraints.dart';
-import 'package:multi_split_view/src/policies.dart';
+import 'package:multi_split_view_next/src/area.dart';
+import 'package:multi_split_view_next/src/controller.dart';
+import 'package:multi_split_view_next/src/internal/layout_constraints.dart';
+import 'package:multi_split_view_next/src/policies.dart';
 
 import 'test_helper.dart';
 
